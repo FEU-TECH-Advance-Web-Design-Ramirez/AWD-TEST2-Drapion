@@ -1,9 +1,9 @@
 *{
     font-family: Poppins, sans-serif;
   }
-  
+
   /* ====== Navigation Bar ====== */
-  
+    
   .navbar {
     background-color: transparent;
     height: 80px;
@@ -139,8 +139,7 @@
     }
   
     .nav-link:hover::after {
-      background-image: linear-gradient(to right, #00b0dc, #F1F0E8);
-      width: 15%;   
+      background-image: linear-gradient(to right, #F1F0E8, #F1F0E8);
   }
   
     .offcanvas-header {
@@ -189,6 +188,12 @@
   .bookAppointment:hover{
     background-color: #F1F0E8;
     color: #274C77;
+  }
+  
+  @media (max-width: 991px) {
+    .nav-link.nav-link.active {
+        color: #274C77;
+    }
   }
 
   /* ====== Footer ====== */
