@@ -272,7 +272,7 @@
     position: relative;
     z-index: 1;
   }
-
+  
   .hero-heading {
     font-size: 2.5rem;
     font-weight: 700;
@@ -280,7 +280,7 @@
     color: #F1F0E8;
     width: 70%;
   }
-
+  
   .hero-desc {
     font-size: 1.2rem;
     max-width: 600px;
@@ -289,7 +289,7 @@
     color: #d9e4ec;
     width: 70%;
   }
-
+  
   .hero-stats-desc{
     color: #F1F0E8;
   }
@@ -316,4 +316,62 @@
   .stats-group {
     display: flex;
     justify-content: center;
+  }
+  
+  @media (max-width: 768px) {
+    .stats-group {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .hero-section .card {
+      width: -50%;
+      height: -50%;
+    }
+  }
+  
+  .hero-section .card h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #6096BA;
+  }
+  
+  .hero-section .card p {
+    font-size: 1rem;
+    opacity: 0.8;
+    color: #F1F0E8;
+  }
+  
+  @media (max-width: 767px) {
+    .stats-group {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 991px) {
+    .hero-heading {
+      font-size: 2rem;
+    }
+  
+    .hero-desc {
+      font-size: 1rem;
+    }
+  
+    .hero-section {
+      height: auto;
+      padding: 3rem 1rem;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .hero-heading {
+      font-size: 1.8rem;
+    }
+  
+    .hero-desc {
+      font-size: 0.9rem;
+    }
+  
+    .hero-section img {
+      max-width: 90%;
+    }
   }
