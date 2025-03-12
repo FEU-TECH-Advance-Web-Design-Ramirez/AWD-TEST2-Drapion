@@ -461,3 +461,16 @@ body {
   .content-section-2 .card{
     border-radius: 30px;
   }
+
+  
+@media (min-width: 991px) {
+    .content-section-2 .card {
+      width: 100%;
+  }
+  .content-section-2 .container {
+    max-width: 750px;
+  }
+  .content-section-2 h2{
+    color: #274C77;
+  }
+  }
