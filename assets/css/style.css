@@ -273,6 +273,14 @@
     z-index: 1;
   }
 
+  .hero-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #F1F0E8;
+    width: 70%;
+  }
+
   .hero-stats-desc{
     color: #F1F0E8;
   }
