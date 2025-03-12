@@ -281,6 +281,15 @@
     width: 70%;
   }
 
+  .hero-desc {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0;
+    line-height: 1.6;
+    color: #d9e4ec;
+    width: 70%;
+  }
+
   .hero-stats-desc{
     color: #F1F0E8;
   }
