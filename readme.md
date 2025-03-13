@@ -118,3 +118,4 @@ WD-ProjectName
 |-|-|-|
 | Bootstrap Documentation | Styling and responsive design | [getbootstrap.com](https://getbootstrap.com/) |
 | Mental Health Research  | Scientific support for mental wellness strategies | [who.int](https://www.who.int/) |
+| Creating a Responsive Navigation Bar  | Provide guidance on creating a responsive navbarusing Bootstrap 5 | [youtube.com](https://www.youtube.com/watch?v=h5apE3E72wY&list=PLL_WPHglaFqyYdX6ED168NWAtEmklolVH&index=3) |
