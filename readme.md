@@ -49,13 +49,13 @@
 ---
 
 ## Overview
-Empath Mental Health Advocates is a mental health app designed to provide accessible, research-backed tools and resources for stress management and mindfulness. It is tailored for professionals, students, and anyone seeking support for mental well-being.
+Soul Speak Mental Health Advocates is a mental health app designed to provide accessible, research-backed tools and resources for stress management and mindfulness. It is tailored for professionals, students, and anyone seeking support for mental well-being.
 
 The app offers guided meditations, mood journaling, and access to professional resources, all presented in a soothing and empathetic design.
 
 Guiding Question:
 - What is the project
-  -Empath Mental Health Advocates is a digital platform aimed at supporting mental health through guided meditations, mood tracking, and access to professional resources.
+  -Soul Speak Mental Health Advocates is a digital platform aimed at supporting mental health through guided meditations, mood tracking, and access to professional resources.
 - Whats the purpose
   -To provide an accessible, research-backed tool that promotes mindfulness, reduces stress, and fosters a supportive mental health community.
 - What are key components
