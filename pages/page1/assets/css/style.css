@@ -357,3 +357,23 @@
         width: 50%;
     }
 }
+
+.shane {
+  background-image: url('../img/team-img-s.png');
+}
+
+.amilia {
+  background-image: url('../img/team-img-am.png');
+}
+
+.hannah {
+  background-image: url('../img/team-img-h.png');
+}
+
+.daniel {
+  background-image: url('../img/team-img-d.png');
+}
+
+.ashley {
+  background-image: url('../img/team-img-as.png');
+}
