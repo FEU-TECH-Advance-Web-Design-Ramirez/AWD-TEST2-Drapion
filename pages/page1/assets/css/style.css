@@ -171,7 +171,7 @@
     margin-top: 1rem;
   }
   
-  .bookAppointment {
+  .login {
     padding: 10px 20px;
     background-color: #274C77;
     color: #F1F0E8;
@@ -182,10 +182,10 @@
     border-radius: 40px;
     font-weight: 500;
     padding: 7px 15px;
-    width: 200px;
+    width: 120px;
   }
   
-  .bookAppointment:hover{
+  .login:hover{
     background-color: #F1F0E8;
     color: #274C77;
   }
@@ -356,4 +356,24 @@
     .team-section .container{
         width: 50%;
     }
+}
+
+.shane {
+  background-image: url('../img/team-img-s.png');
+}
+
+.amilia {
+  background-image: url('../img/team-img-am.png');
+}
+
+.hannah {
+  background-image: url('../img/team-img-h.png');
+}
+
+.daniel {
+  background-image: url('../img/team-img-d.png');
+}
+
+.ashley {
+  background-image: url('../img/team-img-as.png');
 }
