@@ -109,13 +109,16 @@
         width: 100%;
         visibility: visible;
     }
-    .login-link{
-      display: none;
-    }
   }
 
   @media (max-width: 991px){
     .login{
+      display: none;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .login-link{
       display: none;
     }
   }
