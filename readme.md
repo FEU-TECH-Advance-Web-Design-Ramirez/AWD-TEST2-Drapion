@@ -66,16 +66,12 @@ To provide an accessible, research-backed tool that promotes mindfulness, reduce
 **What are key components**<br />
 
   - A calming and intuitive interface designed for seamless user experience.
-  
   - Guided meditation sessions tailored for different moods and needs.
     
 **What technology used and how it is used**<br />
   - Frontend: HTML, CSS, JavaScript, and Bootstrap for responsive design.
-
   - Backend: Node.js and Express.js to manage API requests and authentication.
-  
   - Database: Firebase or MongoDB for storing user data securely.
-  
   - Third-Party APIs: Integration with mental health services for real-time support.
 
 ### Key Components
