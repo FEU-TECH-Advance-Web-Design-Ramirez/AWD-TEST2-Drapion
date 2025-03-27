@@ -53,29 +53,30 @@ Soul Speak Mental Health Advocates is a mental health app designed to provide ac
 
 The app offers guided meditations, mood journaling, and access to professional resources, all presented in a soothing and empathetic design.
 
-##### Guiding Question:
+**Guiding Question:**
 
 **What is the project** <br />
 
 Soul Speak Mental Health Advocates is a digital platform aimed at supporting mental health through guided meditations, mood tracking, and access to professional resources.
 
 **Whats the purpose**<br />
+
 To provide an accessible, research-backed tool that promotes mindfulness, reduces stress, and fosters a supportive mental health community.
 
 **What are key components**<br />
 
-  -A calming and intuitive interface designed for seamless user experience.
+  - A calming and intuitive interface designed for seamless user experience.
   
   - Guided meditation sessions tailored for different moods and needs.
     
 **What technology used and how it is used**<br />
-  -Frontend: HTML, CSS, JavaScript, and Bootstrap for responsive design.
+  - Frontend: HTML, CSS, JavaScript, and Bootstrap for responsive design.
 
-  -Backend: Node.js and Express.js to manage API requests and authentication.
+  - Backend: Node.js and Express.js to manage API requests and authentication.
   
-  -Database: Firebase or MongoDB for storing user data securely.
+  - Database: Firebase or MongoDB for storing user data securely.
   
-  -Third-Party APIs: Integration with mental health services for real-time support.
+  - Third-Party APIs: Integration with mental health services for real-time support.
 
 ### Key Components
 - MultiPage Website for smooth navigation.
