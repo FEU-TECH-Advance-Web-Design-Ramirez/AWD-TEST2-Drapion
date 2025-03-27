@@ -32,7 +32,6 @@
    - **Mood Journal:**  Easy-to-use mood tracking interface with daily prompts and visualizations of mood history.
    - **Book an Appointment:** Calendar system for scheduling mental health consultations.
    - **Personality Exam:** Interactive personality tests with tailored wellness tips based on results.
-   - **Resource Library:** Interactive personality tests with tailored wellness tips based on results.
    - **Hospital Location Registration:**  map interface allowing users to register their preferred hospital location for emergency contacts or consultation referrals.
 
 4. **Community Engagement:**  
