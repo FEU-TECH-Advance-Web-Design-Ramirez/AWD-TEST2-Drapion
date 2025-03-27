@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/zyx-0314/">
-    <img src="./assets/img/soulspeakLogo.png" alt="Nyebe" width="250" height="100">
+    <img src="./assets/img/soulspeakLogo.png" alt="SoulSpeak" width="350" height="100">
   </a>
   <h3 align="center">Soul Speak</h3>
 </div>
