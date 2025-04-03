@@ -1,19 +1,31 @@
 const API_URL = "https://demo-api-skills.vercel.app/api/MentalWellness/hospitals";
+const SEARCH_API_URL = "https://demo-api-skills.vercel.app/api/MentalWellness/hospitals/search";
 
 // Register Facility
 document.getElementById("registerFacilityForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
     const name = document.getElementById("facilityName").value;
-    const location = document.getElementById("facilityLocation").value;
+    const region = document.getElementById("facilityRegion").value;
+    const province = document.getElementById("facilityProvince").value;
+    const city = document.getElementById("facilityCity").value;
     const contactInfo = document.getElementById("facilityContact").value;
     const type = document.getElementById("facilityType").value;
+
+    if (!city || !province || !region) {
+        document.getElementById("registerFacilityMessage").textContent = "❌ Please select a valid location!";
+        document.getElementById("registerFacilityMessage").style.color = "red";
+        return;
+    }
 
     if (!type) {
         document.getElementById("registerFacilityMessage").textContent = "❌ Please select a facility type!";
         document.getElementById("registerFacilityMessage").style.color = "red";
         return;
     }
+
+    // Constructing the full location format: "City, Province, Region"
+    const location = `${city}, ${province}, ${region}`;
 
     console.log("Submitting Facility:", { name, location, contactInfo, type });
 
@@ -50,61 +62,83 @@ function fetchFacilities() {
         .catch(error => console.error("Error fetching facilities:", error));
 }
 
-// Search Facilities
-function searchFacilities() {
-    const location = document.getElementById("searchLocation").value;
-    const type = document.getElementById("searchType").value;
+// Display Facilities in List
+function displayFacilities(facilities) {
+    const list = document.getElementById("facilitiesList");
+    list.innerHTML = "";
 
-    if (!location && !type) {
-        alert("Please provide at least one search criterion (location or type).");
+    if (facilities.length === 0) {
+        list.innerHTML = "<li class='list-group-item text-danger'>No facilities found.</li>";
         return;
     }
 
-    const searchAPI = "https://demo-api-skills.vercel.app/api/MentalWellness/hospitals/search";
+    facilities.forEach(facility => {
+        const li = document.createElement("li");
+        li.className = "list-group-item";
+        li.textContent = `${facility.name} - ${facility.location} (${facility.type})`;
+        list.appendChild(li);
+    });
+}
+
+// Search Facilities
+function searchFacilities() {
+    const region = document.getElementById("searchRegion").value;
+    const province = document.getElementById("searchProvince").value;
+    const city = document.getElementById("searchCity").value;
+    const type = document.getElementById("searchType").value;
+
+    if (!region && !province && !city && !type) {
+        alert("❌ Please provide at least one search criterion (region, province, city, or type).");
+        return;
+    }
+
+    // Construct search location string
+    let location = "";
+    if (city) location = city;
+    if (province) location = location ? `${location}, ${province}` : province;
+    if (region) location = location ? `${location}, ${region}` : region;
 
     console.log("Searching for:", { location, type });
 
-    axios.get(searchAPI, { params: { location, type } })
+    axios.get(SEARCH_API_URL, { params: { location, type } })
         .then(response => {
-            console.log("Search Results:", response.data);
-            const results = response.data;
-            const list = document.getElementById("searchResults");
-            list.innerHTML = "";
-
-            if (results.length === 0) {
-                list.innerHTML = "<li class='list-group-item text-danger'>No results found.</li>";
-                return;
-            }
-
-            results.forEach(facility => {
-                const li = document.createElement("li");
-                li.className = "list-group-item";
-                li.textContent = `${facility.name} - ${facility.location} (${facility.type})`;
-                list.appendChild(li);
-            });
+            console.log("Search API Results:", response.data);
+            displaySearchResults(response.data);
         })
         .catch(error => {
-            console.error("Search Error:", error.response ? error.response.data : error);
-            document.getElementById("searchResults").innerHTML = "<li class='list-group-item text-danger'>❌ Search failed.</li>";
+            console.error("Search API Error:", error.response ? error.response.data : error);
+            console.warn("❗ Using Local Filtering as Fallback");
+
+            // If API search fails, fetch all and filter manually
+            axios.get(API_URL)
+                .then(response => {
+                    console.log("Fetched All Facilities for Local Filtering:", response.data);
+                    const filtered = response.data.filter(facility =>
+                        (!location || facility.location.includes(location)) &&
+                        (!type || facility.type === type)
+                    );
+                    displaySearchResults(filtered);
+                })
+                .catch(err => console.error("Fallback Error Fetching All Facilities:", err));
         });
 }
 
-function fetchFacilities() {
-    axios.get(API_URL)
-        .then(response => {
-            console.log("Fetched Facilities:", response.data);
-            const facilities = response.data;
-            const list = document.getElementById("facilitiesList");
-            list.innerHTML = "";
+// Display Search Results
+function displaySearchResults(results) {
+    const list = document.getElementById("searchResults");
+    list.innerHTML = "";
 
-            facilities.forEach(facility => {
-                const li = document.createElement("li");
-                li.className = "list-group-item";
-                li.textContent = `${facility.name} - ${facility.location} (${facility.type})`;
-                list.appendChild(li);
-            });
-        })
-        .catch(error => console.error("Error fetching facilities:", error));
+    if (results.length === 0) {
+        list.innerHTML = "<li class='list-group-item text-danger'>No results found.</li>";
+        return;
+    }
+
+    results.forEach(facility => {
+        const li = document.createElement("li");
+        li.className = "list-group-item";
+        li.textContent = `${facility.name} - ${facility.location} (${facility.type})`;
+        list.appendChild(li);
+    });
 }
 
 
@@ -279,6 +313,39 @@ document.getElementById("facilityProvince").addEventListener("change", function(
     const region = document.getElementById("facilityRegion").value;
     const province = this.value;
     const citySelect = document.getElementById("facilityCity");
+    citySelect.innerHTML = '<option value="">Select City</option>';
+    
+    if (region && province && locationData[region][province]) {
+        locationData[region][province].forEach(city => {
+            let option = document.createElement("option");
+            option.value = city;
+            option.textContent = city;
+            citySelect.appendChild(option);
+        });
+    }
+});
+
+document.getElementById("searchRegion").addEventListener("change", function() {
+    const region = this.value;
+    const provinceSelect = document.getElementById("searchProvince");
+    const citySelect = document.getElementById("searchCity");
+    provinceSelect.innerHTML = '<option value="">Select Province</option>';
+    citySelect.innerHTML = '<option value="">Select City</option>';
+    
+    if (region && locationData[region]) {
+        Object.keys(locationData[region]).forEach(province => {
+            let option = document.createElement("option");
+            option.value = province;
+            option.textContent = province;
+            provinceSelect.appendChild(option);
+        });
+    }
+});
+
+document.getElementById("searchProvince").addEventListener("change", function() {
+    const region = document.getElementById("searchRegion").value;
+    const province = this.value;
+    const citySelect = document.getElementById("searchCity");
     citySelect.innerHTML = '<option value="">Select City</option>';
     
     if (region && province && locationData[region][province]) {
