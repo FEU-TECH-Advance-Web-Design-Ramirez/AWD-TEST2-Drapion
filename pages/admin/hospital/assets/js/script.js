@@ -142,12 +142,28 @@ function displaySearchResults(results) {
 }
 
 
+let selectedHospitals = []; // Ensure this is defined globally
+
+// Fetch hospitals from API and display them
+function fetchAndDisplayHospitals() {
+    axios.get(API_URL)
+        .then(response => {
+            console.log("Fetched Hospitals:", response.data);
+            displayHospitalsToPick(response.data); // Pass data to display function
+        })
+        .catch(error => {
+            console.error("Error fetching hospitals:", error);
+            document.getElementById("hospitalList").innerHTML = 
+                "<li class='list-group-item text-danger'>Failed to load hospitals.</li>";
+        });
+}
+
 // Display hospitals to be selected for the appointment list
 function displayHospitalsToPick(hospitals) {
     const list = document.getElementById("hospitalList");
     list.innerHTML = ""; // Clear the list before rendering
 
-    hospitals.forEach(function (hospital, index) {
+    hospitals.forEach((hospital, index) => {
         const li = document.createElement("li");
         li.className = "list-group-item d-flex justify-content-between align-items-center";
         li.innerHTML = `
@@ -160,35 +176,37 @@ function displayHospitalsToPick(hospitals) {
 
 // Select a hospital and store it in localStorage
 function selectHospital(index, name, location, type) {
-    // Check if hospital is already selected
+    if (!selectedHospitals) {
+        selectedHospitals = [];
+    }
+
     if (selectedHospitals.some(hospital => hospital.name === name && hospital.location === location)) {
         alert("❌ This hospital is already selected!");
         return;
     }
 
-    // Add selected hospital to the local array
     selectedHospitals.push({ name, location, type });
 
-    // Save the selected hospitals to localStorage
     saveSelectedHospitals();
-
     alert("✅ Hospital selected for appointment!");
     displaySelectedHospitals();
 }
 
 // Save selected hospitals to localStorage
 function saveSelectedHospitals() {
-    localStorage.setItem('selectedHospitals', JSON.stringify(selectedHospitals));
+    localStorage.setItem("selectedHospitals", JSON.stringify(selectedHospitals));
 }
 
 // Load selected hospitals from localStorage
 function loadSelectedHospitals() {
-    const savedHospitals = localStorage.getItem('selectedHospitals');
-    if (savedHospitals) {
-        selectedHospitals = JSON.parse(savedHospitals);
-        displaySelectedHospitals();
-    }
+    const savedHospitals = localStorage.getItem("selectedHospitals");
+    selectedHospitals = savedHospitals ? JSON.parse(savedHospitals) : [];
+    displaySelectedHospitals();
 }
+
+// Call fetchAndDisplayHospitals on page load
+fetchAndDisplayHospitals();
+loadSelectedHospitals();
 
 // Display selected hospitals in the appointment list
 function displaySelectedHospitals() {
