@@ -94,7 +94,7 @@ function fetchFacilities() {
         .then(response => {
             console.log("Fetched Facilities:", response.data);
             const facilities = response.data;
-            const list = document.getElementById("hospitalList");
+            const list = document.getElementById("facilitiesList");
             list.innerHTML = "";
 
             facilities.forEach(facility => {
@@ -202,3 +202,91 @@ function deleteHospital(index) {
 
 // Call this on page load to load the selected hospitals and display them
 loadSelectedHospitals();
+
+const locationData = {
+    "Metro Manila": {
+        "Metro Manila": ["Binondo", "Caloocan City", "Ermita", "Intramuros", "Las Pinas City", "Makati City", "Malabon City", "Malate", "Mandaluyong City", "Marikina City", "Muntinlupa City", "Navotas City", "Paco", "Pandacan", "Paranaque City", "Pasay City", "Pasig City", "Pateros", "Port Area", "Quezon City", "Quiapo", "Sampaloc", "San Juan City", "San Miguel", "San Nicolas", "Santa Ana", "Santa Cruz", "Taguig City", "Tondo", "Valenzuela City"]
+    },
+    "Mindanao": {
+        "Agusan Del Norte": ["Buenavista", "Butuan City", "Cabadbaran City", "Carmen", "Jabonga", "Kitcharao", "Las Nieves", "Magallanes", "Nasipit", "Remedios T. Romualdez", "Santiago", "Tubay"],
+        "Agusan Del Sur": ["Bayugan City", "Bunawan", "Esperanza", "La Paz", "Loreto", "Prosperidad", "Rosario", "San Francisco", "San Luiz", "Santa Josefa", "Sibagat", "Talacogon", "Trento", "Veruela"] ,
+        "Basilan": ["Akbar", "Al-Barka", "Hadji Mohammad Ajul", "Hadji Muhtamad", "Isabela City", "Lamitan City", "Lantawan", "Maluso", "Sumisip", "Tabuan-Lasa", "Tipo-Tipo", "Tuburan", "Ungkaya Pukan"],
+        "Bukidnon": ["Malaybalay City", "Valencia City", "Maramag", "Quezon", "Don Carlos"] ,
+        "Camiguin": ["Mambajao", "Mahinog", "Guinsiliban", "Sagay", "Catarman"],
+        "Compostela Valley": ["Compostela", "Monkayo", "Mawab", "Nabunturan", "Pantukan"],
+        "Cotabato": ["Kidapawan City", "Matalam", "Midsayap", "Kabacan", "Pikit"],
+        "Davao Del Norte": ["Tagum City", "Panabo City", "Samal City", "Carmen", "Kapalong"],
+        "Davao Del Sur": ["Davao City", "Digos"],
+        "Davao Oriental": ["Mati City", "Baganga", "Boston", "Caraga", "Cateel"],
+        "Dinagat Islands": ["San Jose", "Dinagat", "Libjo", "Tubajon"],
+        "Lanao Del Norte": ["Iligan City", "Kapatagan", "Lala", "Sultan Naga Dimaporo"],
+        "Lanao Del Sur": ["Marawi City", "Malabang", "Wao"],
+        "Maguindanao": ["Cotabato City", "Datu Odin Sinsuat", "Buluan"],
+        "Misamis Occidental": ["Oroquieta City", "Ozamiz City", "Tangub City"],
+        "Misamis Oriental": ["Cagayan de Oro", "Gingoog"],
+        "North Cotabato": ["Kidapawan City", "Midsayap"],
+        "Sarangani": ["Alabel", "Glan"],
+        "South Cotabato": ["General Santos City", "Koronadal City"],
+        "Sultan Kudarat": ["Isulan", "Tacurong City"],
+        "Sulu": ["Jolo", "Patikul"],
+        "Surigao Del Norte": ["Surigao City", "Dapa"],
+        "Surigao Del Sur": ["Tandag City", "Bislig City"],
+        "Tawi-Tawi": ["Bongao", "Sitangkai"],
+        "Zamboanga Del Norte": ["Dipolog City", "Dapitan City"],
+        "Zamboanga Del Sur": ["Pagadian City", "Zamboanga City"],
+        "Zamboanga Sibugay": ["Ipil"]
+    },
+    "North Luzon": {
+        "Pangasinan": ["Dagupan", "Lingayen", "Alaminos", "Urdaneta"],
+        "Benguet": ["Baguio City", "La Trinidad"],
+        "Ilocos Norte": ["Laoag City", "Batac"],
+        "Ilocos Sur": ["Vigan City", "Candon"],
+        "La Union": ["San Fernando City", "Bauang"]
+    },
+    "South Luzon": {
+        "Laguna": ["Calamba", "Santa Rosa", "San Pablo", "Biñan"],
+        "Batangas": ["Batangas City", "Lipa", "Tanauan", "Nasugbu"],
+        "Quezon": ["Lucena City", "Tayabas"],
+        "Cavite": ["Tagaytay", "Dasmariñas", "Bacoor", "Imus"]
+    },
+    "Visayas": {
+        "Cebu": ["Cebu City", "Mandaue", "Lapu-Lapu", "Talisay"],
+        "Iloilo": ["Iloilo City", "Passi", "Oton"],
+        "Leyte": ["Tacloban", "Ormoc"],
+        "Negros Occidental": ["Bacolod", "San Carlos"],
+        "Bohol": ["Tagbilaran", "Ubay"]
+    }
+};
+
+document.getElementById("facilityRegion").addEventListener("change", function() {
+    const region = this.value;
+    const provinceSelect = document.getElementById("facilityProvince");
+    const citySelect = document.getElementById("facilityCity");
+    provinceSelect.innerHTML = '<option value="">Select Province</option>';
+    citySelect.innerHTML = '<option value="">Select City</option>';
+    
+    if (region && locationData[region]) {
+        Object.keys(locationData[region]).forEach(province => {
+            let option = document.createElement("option");
+            option.value = province;
+            option.textContent = province;
+            provinceSelect.appendChild(option);
+        });
+    }
+});
+
+document.getElementById("facilityProvince").addEventListener("change", function() {
+    const region = document.getElementById("facilityRegion").value;
+    const province = this.value;
+    const citySelect = document.getElementById("facilityCity");
+    citySelect.innerHTML = '<option value="">Select City</option>';
+    
+    if (region && province && locationData[region][province]) {
+        locationData[region][province].forEach(city => {
+            let option = document.createElement("option");
+            option.value = city;
+            option.textContent = city;
+            citySelect.appendChild(option);
+        });
+    }
+});
